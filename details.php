@@ -55,10 +55,10 @@ if (isset($_GET['id'])) {
 
     ?>
     <!-- //! type image -->
-    <?php
+    <!-- <?php
     var_dump(substr($imageData, 0, 20)); // يعرض أول 20 بايت
 
-    ?>
+    ?> -->
     <div class="conntainer">
         <header>
             <div id="mySidenav" class="sidenav">
