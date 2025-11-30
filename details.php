@@ -2,16 +2,35 @@
 include "favourite.php";
 include "connect.php";
 
-$id = $_GET['id'];
+// 1. تحسين الأمان: استخدم الاستعلامات المجهزة (Prepared Statements) 
+// هذا يحمي من هجمات حقن SQL
 if (isset($_GET['id'])) {
-    $query = $conn->prepare("SELECT * FROM favourites WHERE id='$id'");
-    $query->execute();
-    $favourites=$query->fetch();
-    
-}else{
-    echo'<h3><span class="row">There is no recipe with this name</span></h3>';
+    // جلب الـ ID
+    $id = $_GET['id'];
+
+    // إعداد الاستعلام
+    $query = $conn->prepare("SELECT * FROM favourites WHERE id=?");
+
+    // تنفيذ الاستعلام مع تمرير الـ ID كمعامل
+    $query->execute([$id]);
+
+    // جلب الوصفة
+    $favourites = $query->fetch(PDO::FETCH_ASSOC); // استخدام FETCH_ASSOC لجعل المصفوفة واضحة
+
+    // تحقق من وجود الوصفة
+    if (!$favourites) {
+        echo '<h3><span class="row">There is no recipe with this ID.</span></h3>';
+        // يمكنك توجيه المستخدم لصفحة أخرى أو إنهاء التنفيذ هنا
+        // exit(); 
+    }
+} else {
+    // إذا لم يكن هناك ID في الرابط
+    echo '<h3><span class="row">No recipe ID provided.</span></h3>';
+    // exit(); 
 }
 
+// ملاحظة: المتغير $id معرف داخل الكتلة if، ولكن يجب تعريفه خارجها إذا أردت استخدامه لاحقًا.
+// في حالتك، أنت تستخدم $favourites فقط في HTML، وهو معرف جيدًا هنا.
 
 ?>
 <!DOCTYPE html>
@@ -29,6 +48,17 @@ if (isset($_GET['id'])) {
 </head>
 
 <body>
+    <?php
+    //* variable for image data
+    $imageData = $favourites['iamge'];
+    $imageType = 'png';
+
+    ?>
+    <!-- //! type image -->
+    <?php
+    var_dump(substr($imageData, 0, 20)); // يعرض أول 20 بايت
+
+    ?>
     <div class="conntainer">
         <header>
             <div id="mySidenav" class="sidenav">
@@ -51,7 +81,8 @@ if (isset($_GET['id'])) {
         </div>
     </div>
     <div class="row">
-        <?php foreach ($favourite as $key) { ?>
+        <?php
+        foreach ($favourite as $key) { ?>
             <div class="card">
                 <div>
                     <a class="xmark" href="deleteFavourite.php">
@@ -67,37 +98,38 @@ if (isset($_GET['id'])) {
             </div>
         <?php } ?>
     </div>
-           
+
+
     <section class="recipe">
-                <div class="recipe-img">
-                <?= '<img class="img" width="100%" height="500vh" src="data:image;base64,
-                     '.base64_encode($recipe['iamge']).'" alt="..">'?>
-                </div>
-                <div class="recipeText">
-                    <h3><span>Name: </span><?= $favourites['name']?></h3>
-                    <p class="content"><?= $favourites['recipe']?>
-                    </p>
-                </div>
-           
+        <?php
+        // 2. التحقق من وجود بيانات الوصفة و الصورة قبل العرض
+        if (isset($favourites) && !empty($favourites['iamge'])) {
+        ?>
+            <div class="recipe-img">
+                <img class="img" width="100%" height="500vh"
+                    src="data:image/jpeg;base64,<?= $imageData ?>"
+                    alt="<?= htmlspecialchars($favourites['name']) ?>">
+            </div>
+
+        <?php
+        } else {
+            // إذا لم يتم العثور على صورة، يمكنك وضع صورة افتراضية (default)
+        ?>
+            <div class="recipe-img">
+                <img class="img" width="100%" height="500vh" src="images/default_recipe.jpg" alt="No image available">
+            </div>
+        <?php
+        }
+        ?>
+        <div class="recipeText">
+            <?php if (isset($favourites)) { ?>
+                <h3><span>Name: </span><?= $favourites['name'] ?></h3>
+                <p class="content"><?= $favourites['recipe'] ?>
+                </p>
+            <?php } ?>
+        </div>
+
     </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     <script src="js/script.js"></script>
 </body>
