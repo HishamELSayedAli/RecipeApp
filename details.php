@@ -28,15 +28,21 @@ if (isset($_GET['id'])) {
     echo '<h3><span class="row">No recipe ID provided.</span></h3>';
     // exit(); 
 }
+//* variable for image data
+$imageData = $favourites['iamge'];
+$imageType = 'png';
+
+
 
 // ملاحظة: المتغير $id معرف داخل الكتلة if، ولكن يجب تعريفه خارجها إذا أردت استخدامه لاحقًا.
 // في حالتك، أنت تستخدم $favourites فقط في HTML، وهو معرف جيدًا هنا.
+
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+    <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css' integrity='sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==' crossorigin='anonymous' />
@@ -49,16 +55,14 @@ if (isset($_GET['id'])) {
 
 <body>
     <?php
-    //* variable for image data
-    $imageData = $favourites['iamge'];
-    $imageType = 'png';
-
-    ?>
-    <!-- //! type image -->
-    <!-- <?php
+   
+   
+   ?>
+   <!-- //! type image 
+    <?php
     var_dump(substr($imageData, 0, 20)); // يعرض أول 20 بايت
 
-    ?> -->
+    ?> --> 
     <div class="conntainer">
         <header>
             <div id="mySidenav" class="sidenav">
