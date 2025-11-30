@@ -18,11 +18,11 @@ This is a dynamic web application designed to create a complete system for manag
 
 ## 🚀 Core Features
 
-* **Recipe Management (CRUD):** Functionality to **C**reate, **R**ead, **U**pdate, and **D**elete recipes.
+* **Recipe Management (CRUD):** Functionality to Create, Read, Update, and Delete recipes.
 * **Detailed View:** Dedicated single pages to display all ingredients and preparation steps for each recipe.
 * **Recipe Submission Form:** Utilizes a script (e.g., `addRecipe.php`) to handle user input and database insertion.
 * **Data Persistence:** Uses a relational database (MySQL) to store application data.
-
+* **🎮 XO Game (Tic-Tac-Toe):** A fully client-side game implemented using HTML, CSS, and pure JavaScript (`local.js`) for interactive entertainment.
 ---
 
 ## 🛠 Technology Stack
