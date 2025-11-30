@@ -74,4 +74,4 @@ To run the Recipe App on your local machine, please follow these instructions:
 
 ## 🤝 Author
 
-Hisham EL-Sayed Ali  - Project Developer and Maintainer.
+> **Developed by [HishamELSayedAli](https://github.com/HishamELSayedAli)**
