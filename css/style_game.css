@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
+
+/* Global Reset */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto Condensed', sans-serif;
+    background-color: #0f172a; /* خلفية داكنة مريحة للعين */
+    color: #f8fafc;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Main Layout Container */
+.container {
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+}
+
+/* Title Styling */
+.title {
+    background: linear-gradient(135deg, #ff2a5f, #ff6b35);
+    color: #ffffff;
+    padding: 12px 20px;
+    margin-bottom: 25px;
+    font-size: 28px;
+    font-weight: 700;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(255, 42, 95, 0.3);
+    letter-spacing: 1px;
+}
+
+.title span {
+    color: #ffe600;
+}
+
+/* XO Grid Board */
+.game-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px; /* مسافة متناسقة بين المربعات بدل margin */
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+/* Individual Grid Squares */
+.square {
+    background-color: #1e293b;
+    border-radius: 12px;
+    font-size: 48px;
+    font-weight: 700;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 2px solid #334155;
+    transition: all 0.2s ease-in-out;
+    user-select: none;
+}
+
+.square:hover {
+    background-color: #334155;
+    border-color: #ff2a5f;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.square:active {
+    transform: translateY(0);
+}
